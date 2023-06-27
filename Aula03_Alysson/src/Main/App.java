@@ -55,8 +55,8 @@ public class App {
 		return teclado.nextInt();
 	}
 	public static void metodoInserir() {
-		String nome = leString("Digite nome");
-		String email = leString("Digite e-mail"); 
+		String nome = leString("Digite nome:");
+		String email = leString("Digite e-mail:"); 
 		Pessoa pessoa = new Pessoa(nome,email);
 		PessoaDAO pessoaDAO01 = new PessoaDAO();
 		pessoaDAO01.inserir(pessoa);
@@ -91,7 +91,7 @@ public class App {
 		 }
 		JOptionPane.showMessageDialog(null, new JTextArea (saida));
 	}else{
-		System.out.println("Não tem registros");
+		System.out.println("Não tem registros!");
 	}
 	}
 	
@@ -113,13 +113,13 @@ public class App {
 		
 	     
 	}else{
-		System.out.println("Não tem registros");
+		System.out.println("Não tem registros!");
 	}
 	}
 	
 	
 	public static Veiculo metodoConsultarIdVeiculo(){
-		String idStr = leString("Digite id");
+		String idStr = leString("Digite id: ");
 	     
         int id = Integer.parseInt(idStr);
         ProdutoDAO dao = new ProdutoDAO();
@@ -129,13 +129,13 @@ public class App {
 	}
 	
 	public static void metodoExcluir() {
-        String tmp = leString("Digite id para excluir");
+        String tmp = leString("Digite id para excluir: ");
         int id = Integer.parseInt(tmp); 
         PessoaDAO dao = new PessoaDAO();
         if (dao.excluir(id)){
-            JOptionPane.showMessageDialog(null, "Registro " +id + " Exluido");
+            JOptionPane.showMessageDialog(null, "Registro " +id + " Excluído!!");
         }else{
-            JOptionPane.showMessageDialog(null, "Registro " +id + " Não existe");
+            JOptionPane.showMessageDialog(null, "Registro " +id + " Não inexistente!!");
         }
     }
 	
@@ -177,7 +177,6 @@ public class App {
         String MarcaAntiga = v.getMarca();
         double DoubleValorAntigo = v.getValor();
         String valorAntigo = String.valueOf(DoubleValorAntigo);
-        
         String novoChassi = leString("Alterar Número de Chassi "+ ChassiAntigo);
         String novaPlaca = leString("Alterar Placa " + PlacaAntiga);
         String novoModelo = leString("Alterar Modelo " + ModeloAntigo);
@@ -213,7 +212,7 @@ public class App {
 				metodoConsultarTodos();
 				break;
 			case 3:
-				String idStr = leString("Digite id");
+				String idStr = leString("Digite id: ");
 				int id = Integer.parseInt(idStr);
 				PessoaDAO dao = new PessoaDAO();
 				Pessoa pess = dao.consultar(id);
@@ -241,10 +240,10 @@ public class App {
 
                    break;
 	           case 6:
-	               System.out.println("Saindo");
+	               System.out.println("Saindo!");
 	               break;
 	           default:
-	               System.out.println("Opcao invalida");
+	               System.out.println("Opcão inválida");
 	       }
 	   }while(op!=6);	
 			
@@ -261,7 +260,7 @@ public class App {
 					break;
 					
 				}case 3:{
-					String idStr = leString("Digite id");
+					String idStr = leString("Digite id: ");
 				int id = Integer.parseInt(idStr);
 				ProdutoDAO dao = new ProdutoDAO();
 				Veiculo veiculo = dao.consultar(id);
@@ -278,7 +277,6 @@ public class App {
 				}else {
 					saida = "Registro não localizado!!";
 				}
-				System.out.println("A");
 					
 				JOptionPane.showMessageDialog(null, new JTextArea(saida));
 					break;
@@ -290,7 +288,7 @@ public class App {
 	                   if (v !=null){
 	                	   metodoAtualizarProduto(v);
 	                   }else{
-	                       System.out.println("Registro nao encontrado");
+	                       System.out.println("Registro não encontrado");
 	                   }break;
 				}case 6:
 		               System.out.println("Saindo!!!");
@@ -298,13 +296,11 @@ public class App {
 		           default:
 				
 					 System.out.println("Opcao invalida");
-				}
-				
-				
+				}	
 			} while (op!=6);
 		}default:
 			
-			 System.out.println("Opcao invalida\n");
+			 System.out.println("Opcão inválida\n");
 	}			
 		}while(op!=0);
 		
