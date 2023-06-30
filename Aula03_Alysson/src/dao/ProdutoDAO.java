@@ -54,6 +54,33 @@ public class ProdutoDAO {
     	return v;
     }
     
+    public Veiculo consultarPlaca(String placa){
+		ConectaBD con = new ConectaBD();
+		String sql = "SELECT * FROM veiculo WHERE placa = ?";
+    	Veiculo v = null; 
+    	try {
+			PreparedStatement pst = con.getConexao().prepareStatement(sql);
+			pst.setString(1, placa);
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+			
+				String Chassi = rs.getString("numeroChassi");
+				String Placa =  rs.getString("placa");
+				String Modelo = rs.getString("modelo");
+				String marca = rs.getString("marca");
+				double Valor = rs.getDouble("valor");
+				v = new Veiculo(Chassi, Placa, Modelo, Valor, marca);
+				v.setId(rs.getInt("idVeiculo"));
+				
+			}
+			
+    	} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+    	
+    	return v;
+    }
+    
     public List<Veiculo>ConsultarTodos(){
         ConectaBD con = new ConectaBD();
         String sql = "SELECT * FROM veiculo";
