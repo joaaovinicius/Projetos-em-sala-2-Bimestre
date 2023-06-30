@@ -31,11 +31,12 @@ public class App {
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("MENU PRODUTO\n");
 	    System.out.println("1- Inserir");
-	    System.out.println("2- Listar todos");
-	    System.out.println("3- Listar por id");
-	    System.out.println("4- Excluir por id");
-	    System.out.println("5- Atualizar");
-	    System.out.println("6- Sair\n");
+	    System.out.println("2- Consultar todos");
+	    System.out.println("3- Consultar id");
+	    System.out.println("4- Consultar Placa");
+	    System.out.println("5- Excluir por id");
+	    System.out.println("6- Atualizar");
+	    System.out.println("7- Sair\n");
 	    System.out.print("Digite: ");
 		
 		return teclado.nextInt();
@@ -55,8 +56,8 @@ public class App {
 		return teclado.nextInt();
 	}
 	public static void metodoInserir() {
-		String nome = leString("Digite nome:");
-		String email = leString("Digite e-mail:"); 
+		String nome = leString("Digite nome");
+		String email = leString("Digite e-mail"); 
 		Pessoa pessoa = new Pessoa(nome,email);
 		PessoaDAO pessoaDAO01 = new PessoaDAO();
 		pessoaDAO01.inserir(pessoa);
@@ -91,7 +92,7 @@ public class App {
 		 }
 		JOptionPane.showMessageDialog(null, new JTextArea (saida));
 	}else{
-		System.out.println("Não tem registros!");
+		System.out.println("Não tem registros");
 	}
 	}
 	
@@ -113,13 +114,13 @@ public class App {
 		
 	     
 	}else{
-		System.out.println("Não tem registros!");
+		System.out.println("Não tem registros");
 	}
 	}
 	
 	
 	public static Veiculo metodoConsultarIdVeiculo(){
-		String idStr = leString("Digite id: ");
+		String idStr = leString("Digite id");
 	     
         int id = Integer.parseInt(idStr);
         ProdutoDAO dao = new ProdutoDAO();
@@ -127,15 +128,25 @@ public class App {
 		return v;
 		
 	}
+	public static Veiculo metodoConsultaPlaca(){
+		String placa = leString("Consultar Placas: ");
+	     
+        ProdutoDAO dao = new ProdutoDAO();
+        Veiculo v = dao.consultarPlaca(placa);
+        String saida = v.getModelo();
+        JOptionPane.showMessageDialog(null, new JTextArea (saida));
+		return v;
+		
+	}
 	
 	public static void metodoExcluir() {
-        String tmp = leString("Digite id para excluir: ");
+        String tmp = leString("Digite id para excluir");
         int id = Integer.parseInt(tmp); 
         PessoaDAO dao = new PessoaDAO();
         if (dao.excluir(id)){
-            JOptionPane.showMessageDialog(null, "Registro " +id + " Excluído!!");
+            JOptionPane.showMessageDialog(null, "Registro " +id + " Exluido");
         }else{
-            JOptionPane.showMessageDialog(null, "Registro " +id + " Não inexistente!!");
+            JOptionPane.showMessageDialog(null, "Registro " +id + " Não existe");
         }
     }
 	
@@ -177,6 +188,7 @@ public class App {
         String MarcaAntiga = v.getMarca();
         double DoubleValorAntigo = v.getValor();
         String valorAntigo = String.valueOf(DoubleValorAntigo);
+        
         String novoChassi = leString("Alterar Número de Chassi "+ ChassiAntigo);
         String novaPlaca = leString("Alterar Placa " + PlacaAntiga);
         String novoModelo = leString("Alterar Modelo " + ModeloAntigo);
@@ -212,7 +224,7 @@ public class App {
 				metodoConsultarTodos();
 				break;
 			case 3:
-				String idStr = leString("Digite id: ");
+				String idStr = leString("Digite id:");
 				int id = Integer.parseInt(idStr);
 				PessoaDAO dao = new PessoaDAO();
 				Pessoa pess = dao.consultar(id);
@@ -227,6 +239,7 @@ public class App {
 				}
 				JOptionPane.showMessageDialog(null, new JTextArea(saida));
 				break;
+			
 			   case 4:
 	               metodoExcluir();
 	               break;
@@ -240,10 +253,10 @@ public class App {
 
                    break;
 	           case 6:
-	               System.out.println("Saindo!");
+	               System.out.println("Saindo!!");
 	               break;
 	           default:
-	               System.out.println("Opcão inválida");
+	               System.out.println("Opcão Inválida!");
 	       }
 	   }while(op!=6);	
 			
@@ -281,26 +294,31 @@ public class App {
 				JOptionPane.showMessageDialog(null, new JTextArea(saida));
 					break;
 				}case 4:{
+					metodoConsultaPlaca();
+				break;
+				}case 5:{
 					metodoExcluirProduto();
 					break;
-				}case 5:{
+				}case 6:{
 					 Veiculo v = metodoConsultarIdVeiculo();
 	                   if (v !=null){
 	                	   metodoAtualizarProduto(v);
 	                   }else{
 	                       System.out.println("Registro não encontrado");
 	                   }break;
-				}case 6:
+				}case 7:
 		               System.out.println("Saindo!!!");
 		               break;
 		           default:
 				
-					 System.out.println("Opcao invalida");
-				}	
-			} while (op!=6);
+					 System.out.println("Opcão invalida");
+				}
+				
+				
+			} while (op!=7);
 		}default:
 			
-			 System.out.println("Opcão inválida\n");
+			 System.out.println("Opcão invalida\n");
 	}			
 		}while(op!=0);
 		
